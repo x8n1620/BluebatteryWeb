@@ -1,0 +1,50 @@
+table {
+	width: 95%;
+	font-size: 12px;
+}
+
+th {
+	background-color: #666;
+	color: #fff;
+}
+
+tr {
+	background-color: #fffbf0;
+	color: #000;
+}
+
+tr:nth-child(odd) {
+	background-color: #e4ebf2;
+}
+
+tr:hover {
+	background-color: #dfac20;
+	color: #fff;
+}
+
+* {
+		  box-sizing: border-box;
+		}
+#ImportForm {
+		  font-size: 12px;
+		  padding: 12px 20px 12px 40px;
+		  margin-bottom: 12px;
+		}
+#searchdateInput {
+		  background-image: url('/css/searchicon.png');
+		  background-position: 10px 10px;
+		  background-repeat: no-repeat;
+		  font-size: 16px;
+		  padding: 12px 20px 12px 40px;
+		  border: 1px solid #ddd;
+		  margin-bottom: 12px;
+		}
+#searchtimeInput {
+		  background-image: url('/css/searchicon.png');
+		  background-position: 10px 10px;
+		  background-repeat: no-repeat;
+		  font-size: 16px;
+		  padding: 12px 20px 12px 40px;
+		  border: 1px solid #ddd;
+		  margin-bottom: 12px;
+		}
