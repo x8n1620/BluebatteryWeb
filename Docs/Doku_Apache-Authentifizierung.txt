@@ -1,0 +1,36 @@
+# Source:
+# https://www.thomas-krenn.com/de/wiki/Webserver_Verzeichnisse_mit_Passwort_sch%C3%BCtzen
+# https://httpd.apache.org/docs/2.4/howto/auth.html
+
+# Modify Apache Configuration
+vi /etc/httpd/conf/httpd.conf
+	<Directory "/var/www">
+	    AllowOverride None
+	    # Allow open access:
+	    Require all granted
+	</Directory>
+
+	<Directory "/var/www/html">
+	    Options Indexes FollowSymLinks
+	    AllowOverride all
+	    Require all granted
+	</Directory>
+
+	<Directory /var/www/html/bluebattery>
+		        Options Indexes FollowSymLinks MultiViews
+		        AllowOverride All
+		        Order allow,deny
+		        allow from all
+	</Directory>
+
+# Create Username/Password File
+htpasswd -cs /etc/httpd/conf.d/htpasswd admin
+htpasswd -s /etc/httpd/conf.d/htpasswd testbenutzer
+
+# Allow Apache to access (with enabled SELinux)
+sudo chcon -t httpd_sys_rw_content_t /etc/httpd/conf.d/htpasswd -R
+sudo restorecon -Rv -n /var/www/html
+
+# move and rename htaccess_webroot to <Webroot>/.htaccess
+# move and rename htaccess_inc to <Webroot>/inc/.htaccess
+

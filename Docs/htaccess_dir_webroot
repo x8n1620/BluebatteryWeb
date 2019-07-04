@@ -1,0 +1,6 @@
+AuthType Basic
+AuthUserFile /etc/httpd/conf.d/htpasswd
+AuthName "bluebattpwd"
+order deny,allow
+allow from all
+require valid-user
