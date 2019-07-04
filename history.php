@@ -48,11 +48,11 @@
 				<th>Imax+</th>
 				<th>Imax-</th>
 				<th></th>
-				<th>Q Σ</th>
-				<th>Q Wh</th>
+				<th>QΣ A</th>
+				<th>QΣ Wh</th>
 				<th>Imax</th>
 				<th>Pmax</th>
-				<th>t</th>
+				<th>tmin</th>
 				<th></th>
 				<th>ϑmax</th>
 				<th>ϑmin</th>
@@ -92,9 +92,9 @@
 		<td><?php echo round($row["minimaler_Batteriestrom_mA"]/1000, 0); ?>A</td>
 		<td></td>
 		<td><?php echo round($row["Solarladung_mAh"]/1000, 0); ?>Ah</td>
-		<td><?php echo round($row["Solarleistung_W"], 0); ?>W</td>
-		<td><?php echo round($row["max_Solarstrom_mA"]/1000, 0); ?>A</td>
 		<td><?php echo round($row["Solarenergie_Wh"], 0); ?>Wh</td>
+		<td><?php echo round($row["max_Solarstrom_mA"]/1000, 0); ?>A</td>
+		<td><?php echo round($row["Solarleistung_W"], 0); ?>W</td>
 		<td><?php echo $row["Ladezeit_Minuten"]; ?></td>
 		<td></td>
 		<td><?php echo round($row["max_Temp"]/100+6, 1); ?></td>
