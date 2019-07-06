@@ -70,8 +70,8 @@ function FunctMintoStd($input)
 				<th>Imax+</th>
 				<th>Imax-</th>
 				<th></th>
-				<th>QΣ A</th>
-				<th>QΣ Wh</th>
+				<th>QΣ</th>
+				<th>QΣ</th>
 				<th>Imax</th>
 				<th>Pmax</th>
 				<th>t</th>
@@ -102,30 +102,30 @@ function FunctMintoStd($input)
 		?><tr>
 		<td>"KW"</td>
 		<td>"Ø Wh"</td>
-		<td><?php echo $row["Datum"]; ?></td>
+		<td align="right"><?php echo $row["Datum"]; ?></td>
+		<td align="right"></td>
+		<td align="right"><?php echo round($row["max_Batteriespannung_mV"]/1000, 1); ?>V</td>
+		<td align="right"><?php echo round($row["min_Batteriespannung_mV"]/1000, 1); ?>V</td>
+		<td align="right"><?php echo round($row["maximaler_Batterieladestand_mAh"]/1000, 0); ?>Ah</td>
+		<td align="right"><?php echo round($row["minimaler_Batterieladestand_mAh"]/1000, 0); ?>Ah</td>
+		<td align="right"><?php echo round(100/160000*$row["maximaler_Batterieladestand_mAh"], 0); ?>%</td>
+		<td align="right"><?php echo round(100/160000*$row["minimaler_Batterieladestand_mAh"], 0); ?>%</td>
+		<td align="right"><?php echo round($row["maximaler_Batteriestrom_mA"]/1000, 0); ?>A</td>
+		<td align="right"><?php echo round($row["minimaler_Batteriestrom_mA"]/1000, 0); ?>A</td>
+		<td align="right"></td>
+		<td align="right"><?php echo round($row["Solarladung_mAh"]/1000, 0); ?>Ah</td>
+		<td align="right"><?php echo round($row["Solarenergie_Wh"], 0); ?>Wh</td>
+		<td align="right"><?php echo round($row["max_Solarstrom_mA"]/1000, 0); ?>A</td>
+		<td align="right"><?php echo round($row["Solarleistung_W"], 0); ?>W</td>
+		<td align="right"><?php echo FunctMintoStd($row["Ladezeit_Minuten"]); ?>h</td> 
+		<td align="right"></td>
+		<td align="right"><?php echo round($row["max_Temp"]/100+6, 1); ?>°C</td>
+		<td align="right"><?php echo round($row["min_Temp"]/100+6, 1); ?>°C</td>
 		<td></td>
-		<td><?php echo round($row["max_Batteriespannung_mV"]/1000, 1); ?>V</td>
-		<td><?php echo round($row["min_Batteriespannung_mV"]/1000, 1); ?>V</td>
-		<td><?php echo round($row["maximaler_Batterieladestand_mAh"]/1000, 0); ?>Ah</td>
-		<td><?php echo round($row["minimaler_Batterieladestand_mAh"]/1000, 0); ?>Ah</td>
-		<td><?php echo round(100/160000*$row["maximaler_Batterieladestand_mAh"], 0); ?>%</td>
-		<td><?php echo round(100/160000*$row["minimaler_Batterieladestand_mAh"], 0); ?>%</td>
-		<td><?php echo round($row["maximaler_Batteriestrom_mA"]/1000, 0); ?>A</td>
-		<td><?php echo round($row["minimaler_Batteriestrom_mA"]/1000, 0); ?>A</td>
-		<td></td>
-		<td><?php echo round($row["Solarladung_mAh"]/1000, 0); ?>Ah</td>
-		<td><?php echo round($row["Solarenergie_Wh"], 0); ?>Wh</td>
-		<td><?php echo round($row["max_Solarstrom_mA"]/1000, 0); ?>A</td>
-		<td><?php echo round($row["Solarleistung_W"], 0); ?>W</td>
-		<td><?php echo FunctMintoStd($row["Ladezeit_Minuten"]); ?>h</td> 
-		<td></td>
-		<td><?php echo round($row["max_Temp"]/100+6, 1); ?></td>
-		<td><?php echo round($row["min_Temp"]/100+6, 1); ?></td>
-		<td></td>
-		<td><?php echo round($row["Entnahme_mAh"]/1000, 0); ?>Ah</td>
-		<td><?php echo round($row["Ladung_mAh"]/1000, 0); ?>Ah</td>
-		<td><?php echo round($row["Externe_Ladung_mAh"]/1000, 0); ?>Ah</td>
-		<td><?php echo round($row["Verbrauch_mAh"]/1000, 0); ?>Ah</td>
+		<td align="right"><?php echo round($row["Entnahme_mAh"]/1000, 0); ?>Ah</td>
+		<td align="right"><?php echo round($row["Ladung_mAh"]/1000, 0); ?>Ah</td>
+		<td align="right"><?php echo round($row["Externe_Ladung_mAh"]/1000, 0); ?>Ah</td>
+		<td align="right"><?php echo round($row["Verbrauch_mAh"]/1000, 0); ?>Ah</td>
 		</tr>
 		<?php
 	    }
