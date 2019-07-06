@@ -1,4 +1,6 @@
 Changelog:
+	04.07.2019
+		- Projekt veröffentlicht
 	06.07.2019:
 		- Fehlerhafte Einheiten auf der History-Seite korrigiert
 		- Anzeite t Solar als hh:mm
