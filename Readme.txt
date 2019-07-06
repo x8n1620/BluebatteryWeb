@@ -2,6 +2,7 @@ Changelog:
 	06.07.2019:
 		- Fehlerhafte Einheiten auf der History-Seite korrigiert
 		- Anzeite t Solar als hh:mm
+		- Projekt unter AGPLv3.0 gestellt 
 
 Webanwendung zur Darstellung von Bluebattery-Daten, die mit der AndroidApp exportiert wurden.
 Diese Webanwendung wurde privat entwickelt und steht nicht in Verbindung mit den Marken BlueSolar und BlueBattery.
