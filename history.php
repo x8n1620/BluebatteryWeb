@@ -8,6 +8,28 @@
 
 </head>
 <body>
+<?php
+//https://www.pchocker.de/php.php?id=4
+function FunctMintoStd($input)
+{
+    $stunden = floor($input / 60);
+    $minuten = floor($input - ($stunden * 60));
+
+    if ($stunden <= 9) {
+        $strStunden = "0" . $stunden;
+    } else {
+        $strStunden = $stunden;
+    }
+
+    if ($minuten <= 9) {
+        $strMinuten = "0" . $minuten;
+    } else {
+        $strMinuten = $minuten;
+    }
+
+    return "$strStunden:$strMinuten";
+}
+?>
 
    <table><tbody><tr>
       <td> <input type="text" id="searchdateInput" onkeyup="searchdateFunction()" placeholder="Filter Datum" title="Type in a date"> </td>
@@ -52,7 +74,7 @@
 				<th>QΣ Wh</th>
 				<th>Imax</th>
 				<th>Pmax</th>
-				<th>tmin</th>
+				<th>t</th>
 				<th></th>
 				<th>ϑmax</th>
 				<th>ϑmin</th>
@@ -95,15 +117,15 @@
 		<td><?php echo round($row["Solarenergie_Wh"], 0); ?>Wh</td>
 		<td><?php echo round($row["max_Solarstrom_mA"]/1000, 0); ?>A</td>
 		<td><?php echo round($row["Solarleistung_W"], 0); ?>W</td>
-		<td><?php echo $row["Ladezeit_Minuten"]; ?></td>
+		<td><?php echo FunctMintoStd($row["Ladezeit_Minuten"]); ?>h</td> 
 		<td></td>
 		<td><?php echo round($row["max_Temp"]/100+6, 1); ?></td>
 		<td><?php echo round($row["min_Temp"]/100+6, 1); ?></td>
 		<td></td>
-		<td><?php echo round($row["Entnahme_mAh"]/1000, 0); ?>A</td>
-		<td><?php echo round($row["Ladung_mAh"]/1000, 0); ?>A</td>
-		<td><?php echo round($row["Externe_Ladung_mAh"]/1000, 0); ?>A</td>
-		<td><?php echo round($row["Verbrauch_mAh"]/1000, 0); ?>A</td>
+		<td><?php echo round($row["Entnahme_mAh"]/1000, 0); ?>Ah</td>
+		<td><?php echo round($row["Ladung_mAh"]/1000, 0); ?>Ah</td>
+		<td><?php echo round($row["Externe_Ladung_mAh"]/1000, 0); ?>Ah</td>
+		<td><?php echo round($row["Verbrauch_mAh"]/1000, 0); ?>Ah</td>
 		</tr>
 		<?php
 	    }

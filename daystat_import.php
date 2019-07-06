@@ -30,14 +30,16 @@ if(isset($_POST["Import"])) {
                   </script>";
                }
          }
-         mysqli_query($db, "update importweb set datetime=concat(Datum,Uhrzeit)");
-         mysqli_query($db, "INSERT INTO daystat
-            SELECT * FROM importweb
-            ON DUPLICATE KEY UPDATE
-            datetime = VALUES(datetime)
-            ");
-         mysqli_query($db, "drop table importweb");
          fclose($file);  
+
+		 mysqli_query($db, "update importweb set datetime=concat(Datum,Uhrzeit)");
+		 mysqli_query($db, "INSERT INTO daystat
+		    SELECT * FROM importweb
+		    ON DUPLICATE KEY UPDATE
+		    datetime = VALUES(datetime)
+		    ");
+		 mysqli_query($db, "drop table importweb");
+
       }
 }   
 ?>

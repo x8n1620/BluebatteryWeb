@@ -1,8 +1,8 @@
 <?php
 $db_host = "localhost"; // Host-Adresse
 $db_name = "bluebattery"; // Datenbankname
-$db_user = "<Benutzername>"; // Benutzername -> bitte anpassen!
-$db_pwd = "<Password>"; // Passwort -> bitte anpassen!
+$db_user = "bluebattery"; // Benutzername
+$db_pwd = "P@ssw0rd"; // Passwort
 
 error_reporting(E_ALL);
 //error_reporting(0);
