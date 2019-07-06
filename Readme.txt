@@ -1,3 +1,9 @@
+Webanwendung zur Darstellung von Bluebattery-Daten, die mit der AndroidApp exportiert wurden.
+Diese Webanwendung wurde privat entwickelt und steht nicht in Verbindung mit den Marken BlueSolar und BlueBattery.
+
+Infos zur notwendigen Hardware und App erhalten sie auf der komerziellen Webseite von Kai Scheffer: 
+https://www.blue-battery.com/
+
 Changelog:
 	04.07.2019
 		- Projekt veröffentlicht
@@ -6,13 +12,11 @@ Changelog:
 		- Anzeite t Solar als hh:mm
 		- Projekt unter AGPLv3.0 gestellt 
 
-Webanwendung zur Darstellung von Bluebattery-Daten, die mit der AndroidApp exportiert wurden.
-Diese Webanwendung wurde privat entwickelt und steht nicht in Verbindung mit den Marken BlueSolar und BlueBattery.
-
-Infos zur notwendigen Hardware und App erhalten sie auf der komerziellen Webseite von Kai Scheffer: 
-https://www.blue-battery.com/
-
-
+Benkannte Probleme / Dinge die noch Fehlen:
+	- Validierung der zu importierenden CSV. Da im Augenblick keine Prüfung erfolgt, kann man sich mit einer fehlerhaften CSV die Datenbank voll muellen
+	- Filter der Tagesstatistik noch nicht optimal, zwei Filter (Datum + Uhrzeit) gleichzeitig noch nicht möglich
+	- Wochenertrag ausrechnen wie in meiner Tabelle habe ich in PHP noch nicht hingebracht
+	- Unterstützung von Eier-Fon Exports
 
     Dieses Programm ist Freie Software: Sie können es unter den Bedingungen
     der GNU Affero General Public License, wie von der Free Software Foundation,
