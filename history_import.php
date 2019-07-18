@@ -7,11 +7,12 @@ if(isset($_POST["Import"])) {
 			$flag = true; // Skip First Line
 			while (($getData = fgetcsv($file, 10000, ";")) !== FALSE) {
 			   if($flag) { $flag = false; continue; } // Skip First Line
+			   $var_Datum = date('Y-m-d', strtotime("$getData[2]")) ; 
 			   $sql = "INSERT into history (Geraeteadresse,Geraetename,Datum,Solarenergie_Wh,Solarladung_mAh,Solarleistung_W,max_Solarstrom_mA,
 					Ladezeit_Minuten,Batterieladestand_mAh,maximaler_Batterieladestand_mAh,minimaler_Batterieladestand_mAh,
 					maximaler_Batteriestrom_mA,minimaler_Batteriestrom_mA,max_Batteriespannung_mV,min_Batteriespannung_mV,
 					max_Temp,min_Temp,Externe_Ladung_mAh,Entnahme_mAh,Ladung_mAh,Verbrauch_mAh)
-				values ('".$getData[0]."','".$getData[1]."','".$getData[2]."','".$getData[3]."','".$getData[4]."','".$getData[5]."','".$getData[6]."',
+				values ('".$getData[0]."','".$getData[1]."','".$var_Datum."','".$getData[3]."','".$getData[4]."','".$getData[5]."','".$getData[6]."',
 					'".$getData[7]."','".$getData[8]."','".$getData[9]."','".$getData[10]."','".$getData[11]."','".$getData[12]."','".$getData[13]."',
 					'".$getData[14]."','".$getData[15]."','".$getData[16]."','".$getData[17]."','".$getData[18]."','".$getData[19]."','".$getData[20]."')";
 

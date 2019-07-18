@@ -91,8 +91,6 @@ function FunctMintoStd($input)
 	require 'inc/db.php';
 	echo "<br />";
 
-//	$sql = "SELECT * FROM history WHERE MONTH( Datum ) = '04' ORDER BY STR_TO_DATE(Datum, '%d.%m.%Y')";
-//	$sql = "SELECT * FROM history WHERE Datum = '31.03.2019' ORDER BY STR_TO_DATE(Datum, '%d.%m.%Y')";
 	$sql = "SELECT * FROM history ORDER BY STR_TO_DATE(Datum, '%d.%m.%Y')";
 	$result = $db->query($sql);
 
@@ -100,9 +98,9 @@ function FunctMintoStd($input)
 	    // output data of each row
 	    while($row = $result->fetch_assoc()) {
 		?><tr>
-		<td>"KW"</td>
+		<td align="right"><?php echo date('W', strtotime($row['Datum'])); ?></td>
 		<td>"Ø Wh"</td>
-		<td align="right"><?php echo $row["Datum"]; ?></td>
+		<td align="right"><?php echo date('d.m.Y', strtotime($row['Datum'])); ?></td>
 		<td align="right"></td>
 		<td align="right"><?php echo round($row["max_Batteriespannung_mV"]/1000, 1); ?>V</td>
 		<td align="right"><?php echo round($row["min_Batteriespannung_mV"]/1000, 1); ?>V</td>

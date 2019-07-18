@@ -11,6 +11,9 @@ Changelog:
 		- Fehlerhafte Einheiten auf der History-Seite korrigiert
 		- Anzeite t Solar als hh:mm
 		- Projekt unter AGPLv3.0 gestellt 
+	18.07.2019
+		- Konvertierung Datumsformat beim Import auf SQL-Standard (Achtung, Format in der DB angepasst. Alte Eintraege manuell konvertieren oder neu importieren)
+
 
 Benkannte Probleme / Dinge die noch Fehlen:
 	- Validierung der zu importierenden CSV. Da im Augenblick keine Prüfung erfolgt, kann man sich mit einer fehlerhaften CSV die Datenbank voll muellen

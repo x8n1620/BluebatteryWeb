@@ -48,14 +48,14 @@
 	require 'inc/db.php';
 	echo "<br />";
 
-	$sql = "SELECT * FROM daystat ORDER BY STR_TO_DATE(Datum, '%d.%m.%Y'), Uhrzeit";
+	$sql = "SELECT * FROM daystat ORDER BY Datum, Uhrzeit";
 	$result = $db->query($sql);
 
 	if ($result->num_rows > 0) {
 	    // output data of each row
 	    while($row = $result->fetch_assoc()) {
 		?><tr>
-		<td><?php echo $row["Datum"]; ?></td>
+		<td><?php echo date('d.m.Y', strtotime($row['Datum'])); ?></td>
 		<td> <?php echo $row["Uhrzeit"]; ?></td>
 		<td></td>
 		<td><?php echo $row["Batteriespannung_V"]; ?> V</td>

@@ -8,27 +8,42 @@ DB_USER=<Benutzername> #// -> bitte anpassen!
 DB_PASSWORD=<Password> #// -> bitte anpassen!
 Importverzeichnis="<Ablagepfad zum den CSV-Exports>"
 
+if [ ! -d "$Importverzeichnis/Archiv" ] 
+then
+    echo "erstelle Archivordner im Importverzeichnis"
+    mkdir $Importverzeichnis/Archiv/
+fi
+
 for file in "$Importverzeichnis"/History-Daten-BlueBatt-2*.csv; do
 	file=$(basename "$file")
 	mysql -h $DB_HOST -u$DB_USER -p$DB_PASSWORD -D $DB_NAME -e "CREATE TEMPORARY TABLE importhistory LIKE history; 
-		LOAD DATA LOCAL INFILE '${Importverzeichnis}/${file}' REPLACE INTO TABLE importhistory FIELDS TERMINATED BY ';' IGNORE 1 ROWS ;
+		ALTER TABLE importhistory DROP PRIMARY KEY; 
+		ALTER TABLE importhistory MODIFY DATUM varchar(255) NULL;
+		LOAD DATA LOCAL INFILE '${Importverzeichnis}/${file}'
+			REPLACE INTO TABLE importhistory FIELDS TERMINATED BY ';' IGNORE 1 ROWS
+			(Geraeteadresse, Geraetename, @var_date, Solarenergie_Wh, Solarladung_mAh, Solarleistung_W, max_Solarstrom_mA, Ladezeit_Minuten,
+			Batterieladestand_mAh, maximaler_Batterieladestand_mAh, minimaler_Batterieladestand_mAh, maximaler_Batteriestrom_mA, minimaler_Batteriestrom_mA,
+			max_Batteriespannung_mV, min_Batteriespannung_mV, max_Temp, min_Temp, Externe_Ladung_mAh, Entnahme_mAh, Ladung_mAh, Verbrauch_mAh)
+				SET Datum = STR_TO_DATE(@var_date, '%d.%m.%Y');
 		INSERT INTO history SELECT * FROM importhistory ON DUPLICATE KEY UPDATE Datum = VALUES(Datum);
-		DROP TABLE importhistory;"
-	rm -f $Importverzeichnis/$file
+		DROP TABLE importhistory;
+	"
+	mv $Importverzeichnis/$file $Importverzeichnis/Archiv/
 	done
 
 for file in "$Importverzeichnis"/Tag-Daten*.csv; do
 	file=$(basename "$file")
 	mysql -h $DB_HOST -u$DB_USER -p$DB_PASSWORD -D $DB_NAME -e "CREATE TEMPORARY TABLE importdaystat LIKE daystat; 
 		ALTER TABLE importdaystat DROP PRIMARY KEY; 
-		ALTER TABLE importdaystat MODIFY datetime varchar(255) NULL; 
+		ALTER TABLE importdaystat MODIFY Datum varchar(255) NULL; 
 		ALTER TABLE importdaystat DROP COLUMN datetime;
-		LOAD DATA LOCAL INFILE '${Importverzeichnis}/${file}' REPLACE INTO TABLE importdaystat FIELDS TERMINATED BY ';' IGNORE 1 ROWS ;
+		LOAD DATA LOCAL INFILE '${Importverzeichnis}/${file}' REPLACE INTO TABLE importdaystat FIELDS TERMINATED BY ';' IGNORE 1 ROWS
+			(Geraeteadresse, Geraetename, @var_date, Uhrzeit, Batteriespannung_V, Batteriestrom_A, Batterieladung_Ah, Solarstrom_A, Modus)
+				SET Datum = STR_TO_DATE(@var_date, '%d.%m.%Y');
 		ALTER TABLE importdaystat ADD COLUMN datetime VARCHAR(255) AFTER Modus;
 		UPDATE importdaystat SET datetime=concat(Datum,Uhrzeit);
 		INSERT INTO daystat SELECT * FROM importdaystat ON DUPLICATE KEY UPDATE datetime = VALUES(datetime);
 		DROP TABLE importdaystat;"
-	rm -f $Importverzeichnis/$file
+	mv $Importverzeichnis/$file $Importverzeichnis/Archiv/
 	done
-
 
