@@ -13,13 +13,22 @@ Changelog:
 		- Projekt unter AGPLv3.0 gestellt 
 	18.07.2019
 		- Konvertierung Datumsformat beim Import auf SQL-Standard (Achtung, Format in der DB angepasst. Alte Eintraege manuell konvertieren oder neu importieren)
-
+	19.07.2019
+		- DB Views eingebaut aus Vorbereitung auf die KW- und Wochen-Ertrags-Ansicht
+		- Spalte KW und Wochenertrag in der history.php 
 
 Benkannte Probleme / Dinge die noch Fehlen:
 	- Validierung der zu importierenden CSV. Da im Augenblick keine Prüfung erfolgt, kann man sich mit einer fehlerhaften CSV die Datenbank voll muellen
 	- Filter der Tagesstatistik noch nicht optimal, zwei Filter (Datum + Uhrzeit) gleichzeitig noch nicht möglich
 	- Wochenertrag ausrechnen wie in meiner Tabelle habe ich in PHP noch nicht hingebracht
 	- Unterstützung von Eier-Fon Exports
+
+Hinweis:
+	Getestet wurde mit CentOS 7 und Fedora 30, Apache 2.4, PHP 7.2 und MariaDB 10 sowie der Android App
+
+	Die notwendigen DB-Views bedingen mindestens MariaDB 8. Versionen darunter (5.5) unterstützen keine selects in Views, hier müssten mehrere "Zwischenviews" gebaut werden
+	CentOS 7.7 hat standardmaessig MariaDB 5.5 installiert, hier kann ueber das Repository von MariaDB aktualisiert werden:
+        https://downloads.mariadb.org/mariadb/repositories/#mirror=herrbischoff&distro=CentOS&distro_release=centos7-amd64--centos7&version=10.4
 
     Dieses Programm ist Freie Software: Sie können es unter den Bedingungen
     der GNU Affero General Public License, wie von der Free Software Foundation,

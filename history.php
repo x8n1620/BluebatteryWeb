@@ -5,12 +5,11 @@
 	<meta name="description" content="BlueBattery History">
 	<title>BlueBattery History</title>
 	<link rel="stylesheet" href="/css/stylesheet.css">
-
 </head>
 <body>
 <?php
 //https://www.pchocker.de/php.php?id=4
-function FunctMintoStd($input)
+function FunctMintoStd($input) // Funktion zum umformatieren <Min> in <hh:mm>
 {
     $stunden = floor($input / 60);
     $minuten = floor($input - ($stunden * 60));
@@ -30,9 +29,8 @@ function FunctMintoStd($input)
     return "$strStunden:$strMinuten";
 }
 ?>
-
    <table><tbody><tr>
-      <td> <input type="text" id="searchdateInput" onkeyup="searchdateFunction()" placeholder="Filter Datum" title="Type in a date"> </td>
+      <td> <input type="text" id="searchdateInput" onkeyup="searchdateFunction()" placeholder="Filter Datum" title="Type in a date"> </td> <!--Suchfeld, bedingt Script weiter unten -->
 
       <td> <form class="form-horizontal" action="history_import.php" method="post" name="upload_excel" enctype="multipart/form-data" id="ImportForm">
 	 <fieldset>
@@ -42,7 +40,6 @@ function FunctMintoStd($input)
 	 </fieldset>
 	</form> </td>
    </tr></tbody></table>
-
 	<table border="0" id="historyTable">
 		<thead>
 			<tr>
@@ -86,20 +83,27 @@ function FunctMintoStd($input)
 			</tr>
 		</thead>
 		<tbody>
-
 <?php
 	require 'inc/db.php';
 	echo "<br />";
 
-	$sql = "SELECT * FROM history ORDER BY STR_TO_DATE(Datum, '%d.%m.%Y')";
+	$sql = "SELECT * FROM view_history ;";
 	$result = $db->query($sql);
 
 	if ($result->num_rows > 0) {
 	    // output data of each row
 	    while($row = $result->fetch_assoc()) {
 		?><tr>
-		<td align="right"><?php echo date('W', strtotime($row['Datum'])); ?></td>
-		<td>"Ø Wh"</td>
+	<?php	$daycount = $row['daycount']; 	//get daycount / KW
+			if ($row[FirstWeekDay]) { //Bedingung, ob erster Tag einer KW
+				echo "<td align='left' rowspan=$daycount>";	//rowspan anhand daycount
+				echo  date('W', strtotime($row['Datum'])) ; 
+				echo "</td>";
+				echo "<td align='right' rowspan=$daycount>";
+				echo ($row['SUM(Solarenergie_Wh)']) . " Wh";	//Ausgabe der Summe solarenergie, zusammengerechnet im view_history
+				echo "</td>";
+			}
+	?>
 		<td align="right"><?php echo date('d.m.Y', strtotime($row['Datum'])); ?></td>
 		<td align="right"></td>
 		<td align="right"><?php echo round($row["max_Batteriespannung_mV"]/1000, 1); ?>V</td>
@@ -134,7 +138,8 @@ function FunctMintoStd($input)
 	?>
 		</tbody>
 	</table>
-	<script>
+	<!--Script f. Suchfeld -->
+	<script> 
 		function searchdateFunction() {
 		  var input, filter, table, tr, td, i, txtValue;
 		  input = document.getElementById("searchdateInput");

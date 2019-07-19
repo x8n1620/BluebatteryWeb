@@ -54,3 +54,20 @@ mysql -h $DB_HOST -u$DB_USER -p$DB_PASSWORD -D $DB_NAME -e "CREATE TABLE daystat
 	datetime VARCHAR(255),
 	PRIMARY KEY (datetime)
 	);"
+
+echo "	Die Views bedingen mindestens MariaDB 8. Versionen darunter (5.5) unterstützen keine selects in Views, hier müssen mehrere \"Zwischenviews\" gebaut werden \n 
+	CentOS 7.7 hat standardmaessig 5.5 installiert, hier kann ueber das Repository von MariaDB aktualisiert werden: \n
+        https://downloads.mariadb.org/mariadb/repositories/#mirror=herrbischoff&distro=CentOS&distro_release=centos7-amd64--centos7&version=10.4"
+echo "view_daycount bauen aus der history"
+mysql -h $DB_HOST -u$DB_USER -p$DB_PASSWORD -D $DB_NAME -e "CREATE VIEW view_daycount AS
+	SELECT * FROM history JOIN (SELECT WEEK(Datum, 3) week_no, COUNT(*) daycount FROM history GROUP BY WEEK(Datum, 3)) AS daycount 
+	WHERE WEEK (Datum, 3) = week_no ORDER BY Datum ;"
+echo "view_firstweekday bauen"
+mysql -h $DB_HOST -u$DB_USER -p$DB_PASSWORD -D $DB_NAME -e 'CREATE VIEW view_firstweekday AS
+	SELECT Datum AS FirstWeekDay from view_daycount INNER JOIN  ( SELECT MIN(Datum) AS first_id, "week_no"
+	AS week_no2 FROM view_daycount  GROUP BY `week_no` ) AS filter ON filter.first_id = view_daycount.Datum ;'
+echo "view_History bauen aus Table history mit daycount (view_daycount), view_firstweekday dazu, Summe der Solarleistung dazu"
+mysql -h $DB_HOST -u$DB_USER -p$DB_PASSWORD -D $DB_NAME -e "CREATE VIEW view_history AS
+	SELECT * FROM view_daycount 
+	LEFT JOIN view_firstweekday ON view_daycount.Datum = view_firstweekday.FirstWeekDay 
+	LEFT JOIN ( SELECT Datum AS SolSumDatum, SUM(Solarenergie_Wh) FROM history GROUP BY WEEK(Datum, 3)) as SolSum ON view_daycount.Datum = SolSumDatum ;"
