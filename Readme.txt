@@ -14,11 +14,11 @@ Changelog:
 	18.07.2019
 		- Konvertierung Datumsformat beim Import auf SQL-Standard (Achtung, Format in der DB angepasst. Alte Eintraege manuell konvertieren oder neu importieren)
 	19.07.2019
-		- DB Views eingebaut aus Vorbereitung auf die KW- und Wochen-Ertrags-Ansicht
+		- DB Views eingebaut als Vorbereitung auf die KW- und Wochen-Ertrags-Ansicht
 		- Spalte KW und Wochenertrag in der history.php 
 		- Dateiueberpruefung in import_bluebattery.bin.sh
 
-Benkannte Probleme / Dinge die noch Fehlen:
+Benkannte Probleme / Dinge die noch fehlen:
 	- Validierung der zu importierenden CSV. Da im Augenblick keine Prüfung erfolgt, 
 		kann man sich mit einer fehlerhaften CSV die Datenbank voll muellen
 		-> erledigt f. Scriptgesteuerten import. Browserbassierend steht aus.
