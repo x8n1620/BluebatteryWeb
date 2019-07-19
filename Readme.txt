@@ -20,7 +20,6 @@ Changelog:
 Benkannte Probleme / Dinge die noch Fehlen:
 	- Validierung der zu importierenden CSV. Da im Augenblick keine Prüfung erfolgt, kann man sich mit einer fehlerhaften CSV die Datenbank voll muellen
 	- Filter der Tagesstatistik noch nicht optimal, zwei Filter (Datum + Uhrzeit) gleichzeitig noch nicht möglich
-	- Wochenertrag ausrechnen wie in meiner Tabelle habe ich in PHP noch nicht hingebracht
 	- Unterstützung von Eier-Fon Exports
 
 Hinweis:
