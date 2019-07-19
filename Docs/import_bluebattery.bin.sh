@@ -33,7 +33,7 @@ for file in "$Importverzeichnis"/History-Daten-BlueBatt-2*.csv; do
                SET Datum = STR_TO_DATE(@var_date, '%d.%m.%Y');
             INSERT INTO history SELECT * FROM importhistory ON DUPLICATE KEY UPDATE Datum = VALUES(Datum);
             DROP TABLE importhistory;"
-      #   mv $Importverzeichnis/$file $Importverzeichnis/Archiv/   
+         mv $Importverzeichnis/$file $Importverzeichnis/Archiv/   
       else
          echo $md5_ist Import-Datei History nicht im korrekten Format, Abbruch
       fi
@@ -60,7 +60,7 @@ for file in "$Importverzeichnis"/Tag-Daten*.csv; do
             UPDATE importdaystat SET datetime=concat(Datum,Uhrzeit);
             INSERT INTO daystat SELECT * FROM importdaystat ON DUPLICATE KEY UPDATE datetime = VALUES(datetime);
             DROP TABLE importdaystat;"
-      #   mv $Importverzeichnis/$file $Importverzeichnis/Archiv/
+         mv $Importverzeichnis/$file $Importverzeichnis/Archiv/
       else
          echo $md5_ist Importdatei Tages-Daten nicht im korrekten Format, Abbruch
       fi
@@ -69,7 +69,7 @@ for file in "$Importverzeichnis"/Tag-Daten*.csv; do
    fi
 done
 
-if  [ $fileimported ]; then
+if  [ $fileimported ]; then # Trigger fuer post-import-scripts (z. B. filescan nextcloud, nachdem geloescht wurde)
    echo es wurden Dateien importiert
 else
    echo es wurde nichts importiert
