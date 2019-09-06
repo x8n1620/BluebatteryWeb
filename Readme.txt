@@ -24,7 +24,7 @@ Changelog:
 		- Spalte KW und Wochenertrag in der history.php 
 		- Dateiueberpruefung in import_bluebattery.bin.sh
 	06.09.2019
-		- Import-Format auf die Firmware Version v307a angepasst 
+		- Import-Format auf die Firmware Version v307 angepasst 
 
 Benkannte Probleme / Dinge die noch fehlen:
 	- Validierung der zu importierenden CSV. Da im Augenblick keine Pruefung erfolgt, 
