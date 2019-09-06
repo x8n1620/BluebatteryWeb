@@ -14,9 +14,9 @@ if(isset($_POST["Import"])) {
             if($flag) { $flag = false; continue; } // Skip First Line
 		$var_Datum = date('Y-m-d', strtotime("$getData[2]")) ; 
 		$sql = "REPLACE INTO importweb
-			(Geraeteadresse, Geraetename, Datum, Uhrzeit, Batteriespannung_V, Batteriestrom_A, Batterieladung_Ah, Solarstrom_A, Modus)
+			(Geraeteadresse, Geraetename, Datum, Uhrzeit, Batteriespannung_V, Batteriestrom_A, Batterieladung_Ah, Solarstrom_A, Modus, Startervoltage_V, Boostercurrent_A)
 		       values ('".$getData[0]."','".$getData[1]."','".$var_Datum."','".$getData[3]."','".$getData[4]."','".$getData[5]."','".$getData[6]."',
-		       '".$getData[7]."','".$getData[8]."')";
+		       '".$getData[7]."','".$getData[8]."','".$getData[9]."','".$getData[10]."')";
 		$result = mysqli_query($db, $sql);
             	if(!isset($result)) {
             	   echo "<script type=\"text/javascript\">
