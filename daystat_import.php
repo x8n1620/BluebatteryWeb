@@ -32,8 +32,7 @@ if(isset($_POST["Import"])) {
             	}
          }
          fclose($file);  
-
-		 mysqli_query($db, "update importweb set datetime=concat(Datum,Uhrzeit)");
+		 mysqli_query($db, "UPDATE importweb SET datetime=CONCAT_WS(' ',Datum,Uhrzeit)");
 		 mysqli_query($db, "INSERT INTO daystat
 		    SELECT * FROM importweb
 		    ON DUPLICATE KEY UPDATE
