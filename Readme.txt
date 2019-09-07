@@ -25,17 +25,21 @@ Changelog:
 		- Dateiueberpruefung in import_bluebattery.bin.sh
 	06.09.2019
 		- Import-Format auf die Firmware Version v307 angepasst 
-	xx.09.2019
+	07.09.2019
 		- Suchfeld History auf SQL-Query umgebaut
-		- History zeigt im Standard nur noch die letzten 30 Tage, über die Suche ist der Zugriff auf ältere Daten möglich
+		- History zeigt im Standard nur noch den letzten Monat an, ueber die Suche ist der Zugriff auf aeltere Daten moeglich
+		- Daystat zeigt im Standard nur noch den letzte Woche an, ueber die Suche ist der Zugriff auf aeltere Daten moeglich
+		- Daystat.datetime Format zwecks Durchsuchbarkeit angepasst. Bestands-DB muessen angepasst werden:
+			UPDATE daystat SET datetime=CONCAT_WS(' ',Datum,Uhrzeit)
 
 Benkannte Probleme / Dinge die noch fehlen:
+	- Verzoegerung bei der Eingabe eines Filters
 	- Validierung der zu importierenden CSV. Da im Augenblick keine Pruefung erfolgt, 
 		kann man sich mit einer fehlerhaften CSV die Datenbank voll muellen
 		-> erledigt f. Scriptgesteuerten import. Browserbassierend steht aus.
-	- Filter der Tagesstatistik noch nicht optimal, zwei Filter (Datum + Uhrzeit) gleichzeitig noch nicht moeglich
 	- Unterstuetzung von Eier-Fon Exports
 	- Fixieren der ersten Zeile, damit die Ueberschrift lesbar bleibt
+	- Darstellung Kalenderwoche/Wochenentrag noch nicht schick
 
 Hinweis:
 	Getestet wurde mit CentOS 7 und Fedora 30, Apache 2.4, PHP 7.2 und MariaDB 10 sowie der Android App
